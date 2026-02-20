@@ -1,0 +1,18 @@
+# Secrets
+.env
+.streamlit/secrets.toml
+airflow/dags/market_pulse/profiles.yml
+
+# Python
+__pycache__/
+*.pyc
+.dbt/
+
+# dbt
+market_pulse/target/
+market_pulse/logs/
+airflow/dags/market_pulse/target/
+airflow/dags/market_pulse/logs/
+
+# Airflow
+airflow/logs/

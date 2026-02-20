@@ -1,0 +1,13 @@
+market_pulse:
+  target: prod
+  outputs:
+    prod:
+      type: snowflake
+      account: EBSQBLV-NJ71987.ca-central-1
+      user: ALENJOSEPH7
+      password: YOUR_SNOWFLAKE_PASSWORD
+      role: TRANSFORMER
+      database: STAGING
+      warehouse: TRANSFORMER_WH
+      schema: CORE
+      threads: 4

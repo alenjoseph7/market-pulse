@@ -1,0 +1,30 @@
+name: 'market_pulse'
+version: '1.0.0'
+
+profile: 'market_pulse'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  market_pulse:
+
+    staging:
+      +materialized: view
+      +database: STAGING
+
+    intermediate:
+      +materialized: view
+      +database: STAGING
+
+    marts:
+      +materialized: table
+      +database: ANALYTICS

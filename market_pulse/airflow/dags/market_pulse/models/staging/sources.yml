@@ -1,0 +1,58 @@
+# =============================================================
+# sources.yml
+# Defines the RAW layer tables as dbt sources
+# This tells dbt where to find the raw data
+# =============================================================
+
+version: 2
+
+sources:
+  - name: raw_stock_prices
+    database: RAW
+    schema: STOCK_PRICES
+    description: "Raw OHLCV stock price data ingested via Snowpipe from Yahoo Finance"
+    tables:
+      - name: daily_ohlcv
+        description: "Raw daily stock prices — untyped, may contain duplicates"
+        columns:
+          - name: ticker
+            description: "Stock ticker symbol e.g. AAPL, MSFT"
+          - name: trade_date
+            description: "Trading date as string in raw layer"
+          - name: open_price
+            description: "Opening price of the day"
+          - name: high_price
+            description: "Highest price of the day"
+          - name: low_price
+            description: "Lowest price of the day"
+          - name: close_price
+            description: "Closing price of the day"
+          - name: volume
+            description: "Number of shares traded"
+          - name: loaded_at
+            description: "Timestamp when row was loaded by Snowpipe"
+
+  - name: raw_fundamentals
+    database: RAW
+    schema: COMPANY_FUNDAMENTALS
+    description: "Company reference data — sector, P/E ratio, market cap"
+    tables:
+      - name: fundamentals
+        description: "Static company fundamentals loaded weekly"
+        columns:
+          - name: ticker
+            description: "Stock ticker symbol"
+          - name: company_name
+            description: "Full company name"
+          - name: sector
+            description: "Industry sector e.g. Technology, Healthcare"
+          - name: industry
+            description: "Specific industry e.g. Consumer Electronics"
+          - name: market_cap
+            description: "Market capitalization in USD"
+          - name: pe_ratio
+            description: "Price to earnings ratio"
+          - name: fifty_two_week_high
+            description: "Highest price in last 52 weeks"
+          - name: fifty_two_week_low
+            description: "Lowest price in last 52 weeks"

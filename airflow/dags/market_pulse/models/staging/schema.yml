@@ -1,0 +1,110 @@
+version: 2
+
+models:
+  # =============================================================
+  # STAGING TESTS
+  # =============================================================
+
+  - name: stg_stock_prices
+    description: "Cleaned and deduplicated daily OHLCV stock prices"
+    columns:
+      - name: ticker
+        description: "Stock ticker symbol"
+        tests:
+          - not_null
+      - name: trade_date
+        description: "Trading date"
+        tests:
+          - not_null
+      - name: close_price
+        description: "Closing price"
+        tests:
+          - not_null
+      - name: volume
+        description: "Shares traded"
+        tests:
+          - not_null
+
+  - name: stg_company_fundamentals
+    description: "Cleaned company reference data"
+    columns:
+      - name: ticker
+        description: "Stock ticker symbol"
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "Full company name"
+        tests:
+          - not_null
+      - name: sector
+        description: "Industry sector"
+        tests:
+          - not_null
+          - accepted_values:
+              values: [
+                'Technology',
+                'Healthcare',
+                'Financial Services',
+                'Consumer Cyclical',
+                'Consumer Defensive',
+                'Energy',
+                'Industrials',
+                'Communication Services',
+                'Basic Materials',
+                'Real Estate',
+                'Utilities'
+              ]
+
+  # =============================================================
+  # MART TESTS
+  # =============================================================
+
+  - name: mart_daily_returns
+    description: "Daily and cumulative returns per ticker"
+    columns:
+      - name: ticker
+        description: "Stock ticker symbol"
+        tests:
+          - not_null
+      - name: trade_date
+        description: "Trading date"
+        tests:
+          - not_null
+      - name: close_price
+        description: "Closing price — must be positive"
+        tests:
+          - not_null
+      - name: daily_return_pct
+        description: "Daily return percentage"
+
+  - name: mart_moving_averages
+    description: "7, 30, 90 day moving averages per ticker"
+    columns:
+      - name: ticker
+        tests:
+          - not_null
+      - name: trade_date
+        tests:
+          - not_null
+      - name: ma_7_day
+        tests:
+          - not_null
+      - name: trend_signal
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['BULLISH', 'BEARISH', 'NEUTRAL']
+
+  - name: mart_sector_performance
+    description: "Monthly sector performance aggregations"
+    columns:
+      - name: sector
+        tests:
+          - not_null
+      - name: trade_month_start
+        tests:
+          - not_null
+      - name: avg_daily_return_pct
+        tests:
+          - not_null

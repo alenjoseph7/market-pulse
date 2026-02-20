@@ -1,0 +1,49 @@
+[0m09:54:21.816123 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C29F272790>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C2A123B3A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C2A123B190>]}
+
+
+============================== 09:54:21.827154 | e9f90e02-844f-4527-8fae-461be46c404c ==============================
+[0m09:54:21.827154 [info ] [MainThread]: Running with dbt=1.10.19
+[0m09:54:21.830143 [debug] [MainThread]: running dbt with arguments {'debug': 'False', 'fail_fast': 'False', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'log_format': 'default', 'invocation_command': 'dbt init market_pulse', 'version_check': 'True', 'empty': 'None', 'printer_width': '80', 'quiet': 'False', 'introspect': 'True', 'partial_parse': 'True', 'warn_error': 'None', 'write_json': 'True', 'log_path': 'logs', 'no_print': 'None', 'target_path': 'None', 'static_parser': 'True', 'profiles_dir': 'C:\\Users\\alenj\\.dbt', 'use_experimental_parser': 'False', 'use_colors': 'True', 'indirect_selection': 'eager'}
+[0m09:54:22.089772 [debug] [MainThread]: Starter project path: C:\Users\alenj\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\dbt\include\starter_project
+[0m09:54:22.235548 [info ] [MainThread]: 
+Your new dbt project "market_pulse" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m09:54:22.236551 [info ] [MainThread]: Setting up your profile.
+[0m09:57:06.998107 [info ] [MainThread]: Profile market_pulse written to C:\Users\alenj\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m09:57:07.001103 [debug] [MainThread]: Command `dbt init` succeeded at 09:57:07.000104 after 165.33 seconds
+[0m09:57:07.003625 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C29F272790>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C2A123BE20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001C2A123B0A0>]}
+[0m09:57:07.006623 [debug] [MainThread]: Flushing usage events
+[0m09:57:07.233348 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m09:57:47.050273 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002631FFA2A60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026320F5B430>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026320F5B220>]}
+
+
+============================== 09:57:47.054799 | b3a5e02b-eb63-4b85-89c9-037898a3eee8 ==============================
+[0m09:57:47.054799 [info ] [MainThread]: Running with dbt=1.10.19
+[0m09:57:47.055797 [debug] [MainThread]: running dbt with arguments {'fail_fast': 'False', 'debug': 'False', 'log_cache_events': 'False', 'send_anonymous_usage_stats': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'cache_selected_only': 'False', 'no_print': 'None', 'target_path': 'None', 'version_check': 'True', 'empty': 'None', 'printer_width': '80', 'partial_parse': 'True', 'log_path': 'logs', 'log_format': 'default', 'warn_error': 'None', 'write_json': 'True', 'quiet': 'False', 'invocation_command': 'dbt debug', 'introspect': 'True', 'static_parser': 'True', 'profiles_dir': 'C:\\Users\\alenj\\.dbt', 'use_experimental_parser': 'False', 'use_colors': 'True', 'indirect_selection': 'eager'}
+[0m09:57:47.090216 [info ] [MainThread]: dbt version: 1.10.19
+[0m09:57:47.091215 [info ] [MainThread]: python version: 3.9.13
+[0m09:57:47.092241 [info ] [MainThread]: python path: C:\Users\alenj\AppData\Local\Microsoft\WindowsApps\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\python.exe
+[0m09:57:47.093214 [info ] [MainThread]: os info: Windows-10-10.0.26200-SP0
+[0m09:57:47.769734 [info ] [MainThread]: Using profiles dir at C:\Users\alenj\.dbt
+[0m09:57:47.770730 [info ] [MainThread]: Using profiles.yml file at C:\Users\alenj\.dbt\profiles.yml
+[0m09:57:47.771732 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\alenj\Desktop\PROJECT\market-pulse\dbt_project.yml
+[0m09:57:47.773005 [error] [MainThread]: Encountered an error:
+Internal Error
+  Profile should not be None if loading profile completed
+[0m09:57:47.774025 [debug] [MainThread]: Command `dbt debug` failed at 09:57:47.774025 after 0.83 seconds
+[0m09:57:47.774025 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002631FFA2A60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026320F5BB20>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000026322005B20>]}
+[0m09:57:47.775019 [debug] [MainThread]: Flushing usage events
+[0m09:57:48.014850 [debug] [MainThread]: An error was encountered while trying to flush usage events
