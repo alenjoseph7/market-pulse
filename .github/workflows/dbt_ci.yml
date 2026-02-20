@@ -26,8 +26,8 @@ jobs:
 
       - name: Create profiles.yml
         run: |
-          mkdir -p ~/.dbt
-          cat > ~/.dbt/profiles.yml << EOF
+          mkdir -p /tmp/dbt_profiles
+          cat > /tmp/dbt_profiles/profiles.yml << EOF
           market_pulse:
             target: prod
             outputs:
@@ -45,12 +45,12 @@ jobs:
 
       - name: dbt debug
         working-directory: ./market_pulse
-        run: dbt debug
+        run: dbt debug --profiles-dir /tmp/dbt_profiles
 
       - name: dbt run
         working-directory: ./market_pulse
-        run: dbt run --target prod
+        run: dbt run --profiles-dir /tmp/dbt_profiles --target prod
 
       - name: dbt test
         working-directory: ./market_pulse
-        run: dbt test --target prod
+        run: dbt test --profiles-dir /tmp/dbt_profiles --target prod
