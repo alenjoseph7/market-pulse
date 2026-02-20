@@ -24,6 +24,9 @@ jobs:
         run: |
           pip install dbt-core==1.7.0 dbt-snowflake==1.7.0
 
+      - name: Remove repo profiles.yml
+        run: rm -f ./market_pulse/profiles.yml
+
       - name: Create profiles.yml
         run: |
           mkdir -p /tmp/dbt_profiles
