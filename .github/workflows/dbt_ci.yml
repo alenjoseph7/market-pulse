@@ -11,6 +11,15 @@ jobs:
     name: Run dbt Tests
     runs-on: ubuntu-latest
 
+    env:
+      DBT_SNOWFLAKE_ACCOUNT: EBSQBLV-NJ71987
+      DBT_SNOWFLAKE_USER: ALENJOSEPH7
+      DBT_SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
+      DBT_SNOWFLAKE_ROLE: TRANSFORMER
+      DBT_SNOWFLAKE_DATABASE: STAGING
+      DBT_SNOWFLAKE_WAREHOUSE: TRANSFORMER_WH
+      DBT_SNOWFLAKE_SCHEMA: CORE
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,35 +31,34 @@ jobs:
 
       - name: Install dbt
         run: |
-          pip install dbt-core==1.7.0 dbt-snowflake==1.7.0 protobuf==3.20.0
+          pip install dbt-core==1.8.0 dbt-snowflake==1.8.0
 
-      - name: Create profiles.yml
+      - name: Write profiles.yml
         run: |
-          mkdir -p /tmp/dbt_profiles
-          cat > /tmp/dbt_profiles/profiles.yml << PROFILE
+          cat > ./market_pulse/profiles.yml << PROFILE
           market_pulse:
             target: prod
             outputs:
               prod:
                 type: snowflake
-                account: EBSQBLV-NJ71987
-                user: ALENJOSEPH7
-                password: "${{ secrets.SNOWFLAKE_PASSWORD }}"
-                role: TRANSFORMER
-                database: STAGING
-                warehouse: TRANSFORMER_WH
-                schema: CORE
+                account: "${DBT_SNOWFLAKE_ACCOUNT}"
+                user: "${DBT_SNOWFLAKE_USER}"
+                password: "${DBT_SNOWFLAKE_PASSWORD}"
+                role: "${DBT_SNOWFLAKE_ROLE}"
+                database: "${DBT_SNOWFLAKE_DATABASE}"
+                warehouse: "${DBT_SNOWFLAKE_WAREHOUSE}"
+                schema: "${DBT_SNOWFLAKE_SCHEMA}"
                 threads: 4
           PROFILE
 
       - name: dbt debug
         working-directory: ./market_pulse
-        run: dbt debug --profiles-dir /tmp/dbt_profiles --no-use-colors
+        run: dbt debug
 
       - name: dbt run
         working-directory: ./market_pulse
-        run: dbt run --profiles-dir /tmp/dbt_profiles --target prod --no-use-colors
+        run: dbt run --target prod
 
       - name: dbt test
         working-directory: ./market_pulse
-        run: dbt test --profiles-dir /tmp/dbt_profiles --target prod --no-use-colors
+        run: dbt test --target prod
