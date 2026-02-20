@@ -11,15 +11,6 @@ jobs:
     name: Run dbt Tests
     runs-on: ubuntu-latest
 
-    env:
-      DBT_SNOWFLAKE_ACCOUNT: EBSQBLV-NJ71987
-      DBT_SNOWFLAKE_USER: ALENJOSEPH7
-      DBT_SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-      DBT_SNOWFLAKE_ROLE: TRANSFORMER
-      DBT_SNOWFLAKE_DATABASE: STAGING
-      DBT_SNOWFLAKE_WAREHOUSE: TRANSFORMER_WH
-      DBT_SNOWFLAKE_SCHEMA: CORE
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -30,24 +21,23 @@ jobs:
           python-version: "3.11"
 
       - name: Install dbt
-        run: |
-          pip install dbt-core==1.8.0 dbt-snowflake==1.8.0
+        run: pip install dbt-core==1.8.0 dbt-snowflake==1.8.0
 
       - name: Write profiles.yml
         run: |
-          cat > ./market_pulse/profiles.yml << PROFILE
+          cat > ./market_pulse/profiles.yml << 'PROFILE'
           market_pulse:
             target: prod
             outputs:
               prod:
                 type: snowflake
-                account: "${DBT_SNOWFLAKE_ACCOUNT}"
-                user: "${DBT_SNOWFLAKE_USER}"
-                password: "${DBT_SNOWFLAKE_PASSWORD}"
-                role: "${DBT_SNOWFLAKE_ROLE}"
-                database: "${DBT_SNOWFLAKE_DATABASE}"
-                warehouse: "${DBT_SNOWFLAKE_WAREHOUSE}"
-                schema: "${DBT_SNOWFLAKE_SCHEMA}"
+                account: EBSQBLV-NJ71987
+                user: ALENJOSEPH7
+                password: "${{ secrets.SNOWFLAKE_PASSWORD }}"
+                role: TRANSFORMER
+                database: STAGING
+                warehouse: TRANSFORMER_WH
+                schema: CORE
                 threads: 4
           PROFILE
 
