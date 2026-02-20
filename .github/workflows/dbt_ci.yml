@@ -22,15 +22,12 @@ jobs:
 
       - name: Install dbt
         run: |
-          pip install dbt-core==1.7.0 dbt-snowflake==1.7.0
-
-      - name: Remove repo profiles.yml
-        run: rm -f ./market_pulse/profiles.yml
+          pip install dbt-core==1.7.0 dbt-snowflake==1.7.0 protobuf==3.20.0
 
       - name: Create profiles.yml
         run: |
           mkdir -p /tmp/dbt_profiles
-          cat > /tmp/dbt_profiles/profiles.yml << EOF
+          cat > /tmp/dbt_profiles/profiles.yml << PROFILE
           market_pulse:
             target: prod
             outputs:
@@ -44,16 +41,16 @@ jobs:
                 warehouse: TRANSFORMER_WH
                 schema: CORE
                 threads: 4
-          EOF
+          PROFILE
 
       - name: dbt debug
         working-directory: ./market_pulse
-        run: dbt debug --profiles-dir /tmp/dbt_profiles
+        run: dbt debug --profiles-dir /tmp/dbt_profiles --no-use-colors
 
       - name: dbt run
         working-directory: ./market_pulse
-        run: dbt run --profiles-dir /tmp/dbt_profiles --target prod
+        run: dbt run --profiles-dir /tmp/dbt_profiles --target prod --no-use-colors
 
       - name: dbt test
         working-directory: ./market_pulse
-        run: dbt test --profiles-dir /tmp/dbt_profiles --target prod
+        run: dbt test --profiles-dir /tmp/dbt_profiles --target prod --no-use-colors
